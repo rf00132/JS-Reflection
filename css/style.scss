@@ -1,0 +1,49 @@
+html{
+    background-color: green;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#container, 
+.form-container, 
+#image-container,
+#multiple-image-warning{
+    margin: 15px auto;
+}
+
+#container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    
+    color: white;
+    img{
+        margin: 10px;
+        border-radius: 10%;
+        border: 1px solid white;
+    }
+}
+
+#submit-btn,
+#email-field{
+    color: white;
+    background-color: purple;
+    padding: 5px 15px;
+    border-radius: 5px;
+    box-shadow: none;
+    
+}
+
+
+#stored-data-display{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 80vw;
+    
+}
+
+#warning-field{
+    margin-top: 30px;
+}
