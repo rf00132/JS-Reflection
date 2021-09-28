@@ -1,4 +1,5 @@
 const submitButton = document.getElementById("submit-btn");
+const skipButton = document.getElementById("skip-btn");
 const emailField = document.getElementById("email-field");
 const regExp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 const dataStorageArea = document.getElementById("stored-data-display");
@@ -25,9 +26,12 @@ function SubmitEvent(){
     } 
 }
 
+function SkipEvent(){
+    CreateImageUrl();
+}
+
 //when this function spits out a no the script doesnt refresh.
 function checkURL(url) {
-    console.log("checking url");
     var request = new XMLHttpRequest();
 
     request.open("GET", url, true);
@@ -40,12 +44,10 @@ function checkURL(url) {
 
         if (status == 200) //if(statusText == OK)
         {
-            console.log("image exists pogchamp");
             testBool = true;
             newLink = url;
             ChangeImage();
         } else {
-            console.log("uh oh, no image sadge");
             CreateImageUrl();
         }
     }
@@ -53,15 +55,15 @@ function checkURL(url) {
 
 function CreateImageUrl(){
     let retVal = "https://picsum.photos/id/"+ GetRandomId() +"/400";
-    console.log("making new URL");
+  
     if(checkURL(retVal)){
-        console.log("URL returned bad, re running method");
+       
         setTimeout(CreateImageUrl, 500);
     }
 }
 
 function GetRandomId(){
-    console.log("getting id");
+
     let x = Math.floor(Math.random()*800) + 1;
     console.log(x);
     return x;
@@ -121,7 +123,6 @@ function CheckForCurrentUser(){
 
 
 function ChangeImage(){
-    console.log("changin image")
     imageToAdd.setAttribute("src", newLink);
     testBool = false;
 }
@@ -139,4 +140,5 @@ function RemoveError(){
 }
 
 
-submitButton.addEventListener("click", SubmitEvent)
+submitButton.addEventListener("click", SubmitEvent);
+skipButton.addEventListener("click", SkipEvent);

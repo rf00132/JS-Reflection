@@ -19,6 +19,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var submitButton = document.getElementById("submit-btn");
+var skipButton = document.getElementById("skip-btn");
 var emailField = document.getElementById("email-field");
 var regExp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 var dataStorageArea = document.getElementById("stored-data-display");
@@ -38,11 +39,14 @@ function SubmitEvent() {
   } else {
     ShowInvalidEmailError();
   }
+}
+
+function SkipEvent() {
+  CreateImageUrl();
 } //when this function spits out a no the script doesnt refresh.
 
 
 function checkURL(url) {
-  console.log("checking url");
   var request = new XMLHttpRequest();
   request.open("GET", url, true);
   request.send();
@@ -52,12 +56,10 @@ function checkURL(url) {
 
     if (status == 200) //if(statusText == OK)
       {
-        console.log("image exists pogchamp");
         testBool = true;
         newLink = url;
         ChangeImage();
       } else {
-      console.log("uh oh, no image sadge");
       CreateImageUrl();
     }
   };
@@ -65,16 +67,13 @@ function checkURL(url) {
 
 function CreateImageUrl() {
   var retVal = "https://picsum.photos/id/" + GetRandomId() + "/400";
-  console.log("making new URL");
 
   if (checkURL(retVal)) {
-    console.log("URL returned bad, re running method");
     setTimeout(CreateImageUrl, 500);
   }
 }
 
 function GetRandomId() {
-  console.log("getting id");
   var x = Math.floor(Math.random() * 800) + 1;
   console.log(x);
   return x;
@@ -145,7 +144,6 @@ function CheckForCurrentUser() {
 }
 
 function ChangeImage() {
-  console.log("changin image");
   imageToAdd.setAttribute("src", newLink);
   testBool = false;
 }
@@ -162,5 +160,5 @@ function RemoveError() {
   document.getElementById("warning-field").textContent = "";
 }
 
-
 submitButton.addEventListener("click", SubmitEvent);
+skipButton.addEventListener("click", SkipEvent);
